@@ -55,6 +55,7 @@
                     ></v-autocomplete>
                   </v-col>
                   <v-col cols="6">
+                     <h3>Tiến độ đề tài</h3>
                     <v-slider
                       v-model="progress"
                       class="align-center"
@@ -63,6 +64,7 @@
                       hide-details
                     >
                       <template v-slot:append>
+                       
                         <v-text-field
                           v-model="progress"
                           class="mt-0 pt-0"
@@ -91,9 +93,7 @@
                       :items="researchLevelList"
                       outlined
                       clearable
-                      item-text="studentName"
-                      item-value="studentName"
-                      label="Thành viên đề tài *"
+                      label="Cấp đề tài *"
                     ></v-combobox>
                   </v-col>
                   <v-col cols="6">
@@ -272,7 +272,7 @@ export default {
       evaluationResult: '',
       councilMembers: [],
       evaluationDate: dayjs(new Date()).format('YYYY-MM-DD'),
-      researchLevelList:['Bộ môn, Khoa, Trường, Tỉnh, Bộ, Nhà nước']
+      researchLevelList:['Bộ môn', 'Khoa', 'Trường', 'Tỉnh', 'Bộ', 'Nhà nước']
     }
   },
   created() {

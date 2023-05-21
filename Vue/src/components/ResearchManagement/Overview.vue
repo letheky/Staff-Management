@@ -218,6 +218,7 @@ export default {
       deleteResearchID: 0,
       filters: {
         researchTitle: [],
+        researchLevel: [],
         duration: [],
         leaderName: [],
         progress: [],

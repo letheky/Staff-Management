@@ -65,13 +65,13 @@ export default {
             },
             {
               iconImg: require('../../assets/images/icon-library.svg'),
-              title: 'Quản lý đề tài nghiên cứu giáo viên',
+              title: 'Quản lý NCKH giáo viên',
               path: '/research-management/overview',
               active: true,
             },
             {
               iconImg: require('../../assets/images/icon-dailyclass.svg'),
-              title: 'Quản lý đề tài nghiên cứu sinh viên',
+              title: 'Quản lý NCKH sinh viên',
               path: '/topic-management/overview',
               active: true,
             },
@@ -109,13 +109,13 @@ export default {
             {
               iconImg: 'isax-profile-2user',
               title: 'Danh sách đề tài các cấp',
-              path: '/account-management/overview',
+              path: '/research-management/overview',
               active: false,
             },
             {
               iconImg: require('../../assets/images/icon-leave.svg'),
               title: 'Danh sách đề tài của sinh viên',
-              path: '/my-calendar/leave-of-absence-history',
+              path: '/topic-management/overview',
               active: true,
             },
             {
@@ -146,7 +146,7 @@ export default {
             {
               iconImg: require('../../assets/images/icon-leave.svg'),
               title: 'Danh sách đề tài sinh viên',
-              path: '/my-calendar/leave-of-absence-history',
+              path: '/topic-management/overview',
               active: true,
             },
           ],

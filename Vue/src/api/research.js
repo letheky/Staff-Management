@@ -5,7 +5,7 @@ import {
     RESEARCH_DELETE,
     RESEARCH_GETALL,
     RESEARCH_GET_BY_ID,
-    RESEARCH_GET_BY_USERID,
+    // RESEARCH_GET_BY_USERID,
     GET_INSTRUCTOR_IN_RESEARCH,
   } from '@/api/constant.js'
   import { handleResponse } from '@/api/handle-response'
@@ -39,13 +39,13 @@ import {
         return data
       })
   }
-  function getResearchByUserID(data) {
-    return fetch(ROOT + RESEARCH_GET_BY_USERID + '?researchID_userID=' + data, requestOptions.get())
-      .then(handleResponse)
-      .then(data => {
-        return data
-      })
-  }
+  // function getResearchByUserID(data) {
+  //   return fetch(ROOT + RESEARCH_GET_BY_USERID + '?researchID_userID=' + data, requestOptions.get())
+  //     .then(handleResponse)
+  //     .then(data => {
+  //       return data
+  //     })
+  // }
   function getAllResearch() {
     return fetch(ROOT + RESEARCH_GETALL , requestOptions.get())
       .then(handleResponse)
@@ -66,7 +66,7 @@ import {
       updateResearch,
       deleteResearch,
       getResearchByID,
-      getResearchByUserID,
+      // getResearchByUserID,
       getAllResearch,
       getInstructorInResearch,
   }
