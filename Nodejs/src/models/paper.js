@@ -14,6 +14,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Paper.init({
+    
+    paperID: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER,
+    },
     paperTitle: DataTypes.STRING,
     paperContent: DataTypes.STRING,
     paperType: DataTypes.STRING,

@@ -10,15 +10,9 @@
           </h2>
           <div>
             <v-btn color="secondary" outlined @click="changePassword()" class="mr-5"
-              >Change password</v-btn
+              >Dổi mật khẩu</v-btn
             >
-            <v-btn
-              color="secondary"
-              v-if="userDetailInfo && currentUser.userInfo.accountTypeID !== 1"
-              outlined
-              @click="edit()"
-              >Edit profile</v-btn
-            >
+            <v-btn color="secondary" outlined @click="edit()">Sửa profile</v-btn>
           </div>
         </div>
       </v-col>
@@ -38,10 +32,10 @@
                 <div class="pt-6">
                   <v-avatar class="d-flex" style="margin: auto" size="125">
                     <img
-                      v-if="!userDetailInfo.details.photo"
+                      v-if="userDetailInfo.image === null"
                       src="@/assets/images/ImageProfile.jpg"
                     />
-                    <img v-else :src="'data:image/jpeg;base64,' + userDetailInfo.details.photo" />
+                    <img v-else :src="'data:image/jpeg;base64,' + userDetailInfo.image" />
                   </v-avatar>
                   <label>
                     <input
@@ -58,56 +52,101 @@
                   </label>
                 </div>
               </v-col>
-              <v-col md="10">
+              <v-col md="10" v-if="currentUser.user.accountTypeName === 'admin'">
                 <v-row no-gutters>
-                  <v-col md="4">
+                  <v-col md="6">
                     <div class="pa-6 list-info">
                       <div class="item">
-                        <div>User name</div>
-                        <div v-if="userDetailInfo.details.userName !== null">
-                          {{ userDetailInfo.details.userName }}
+                        <div>Họ và tên</div>
+                        <div v-if="userDetailInfo[0] && userDetailInfo[0].adminName">
+                          {{ userDetailInfo[0].adminName }}
                         </div>
                       </div>
                       <div class="item">
-                        <div>Full name</div>
-                        <div v-if="userDetailInfo.details.fullName !== null">
-                          {{ userDetailInfo.details.fullName }}
+                        <div>Kiểu tài khoản</div>
+                        <div>
+                          {{ currentUser.user.accountTypeName }}
                         </div>
                       </div>
                       <div class="item">
-                        <div>Gender</div>
-                        <div v-if="userDetailInfo.details.gender">
-                          {{ userDetailInfo.details.gender == 'M' ? 'Male' : 'Female' }}
+                        <div>Giới tính</div>
+                        <div v-if="userDetailInfo[0] && userDetailInfo[0].gender">
+                          {{ userDetailInfo[0].gender ? 'Nam' : 'Nữ' }}
                         </div>
                       </div>
                       <div class="item">
-                        <div>Date of birth</div>
-                        <div v-if="userDetailInfo.details.dob">
-                          {{ _dayjs(userDetailInfo.details.dob).format('DD/MM/YYYY') }}
+                        <div>Ngày sinh</div>
+                        <div v-if="userDetailInfo[0] && userDetailInfo[0].dob">
+                          {{ _dayjs(userDetailInfo[0].dob).format('DD/MM/YYYY') }}
                         </div>
                       </div>
                       <div class="border-vertical"></div>
                     </div>
                   </v-col>
 
+                  <v-col md="6">
+                    <div class="pa-6 list-info">
+                      <div class="item">
+                        <div>Địa chỉ</div>
+                        <div v-if="userDetailInfo[0] && userDetailInfo[0].address">
+                          {{ userDetailInfo[0].address }}
+                        </div>
+                      </div>
+                      <div class="item">
+                        <div>Số điện thoại</div>
+                        <div v-if="userDetailInfo[0] && userDetailInfo[0].phoneNum">
+                          {{ userDetailInfo[0].phoneNum }}
+                        </div>
+                      </div>
+                      <div class="border-vertical"></div>
+                    </div>
+                  </v-col>
+                </v-row>
+              </v-col>
+              <v-col md="10" v-else-if="currentUser.user.accountTypeName === 'teacher'">
+                <v-row no-gutters>
                   <v-col md="4">
                     <div class="pa-6 list-info">
                       <div class="item">
-                        <div>Home phone</div>
-                        <div v-if="userDetailInfo.details.homePhone">
-                          {{ userDetailInfo.details.homePhone }}
+                        <div>Họ và tên</div>
+                        <div v-if="userDetailInfo[0] && userDetailInfo[0].instructorName">
+                          {{ userDetailInfo[0].instructorName }}
                         </div>
                       </div>
                       <div class="item">
-                        <div>Mobile</div>
-                        <div v-if="userDetailInfo.details.mobilePhone">
-                          {{ userDetailInfo.details.mobilePhone }}
+                        <div>Kiểu tài khoản</div>
+                        <div v-if="userDetailInfo[0]">
+                          {{ currentUser.user.accountTypeName }}
                         </div>
                       </div>
                       <div class="item">
-                        <div>Email</div>
-                        <div v-if="userDetailInfo.details.email">
-                          {{ userDetailInfo.details.email }}
+                        <div>Giới tính</div>
+                        <div v-if="userDetailInfo[0]">
+                          {{ userDetailInfo[0].gender ? 'Nam' : 'Nữ' }}
+                        </div>
+                      </div>
+
+                      <div class="border-vertical"></div>
+                    </div>
+                  </v-col>
+                  <v-col md="4">
+                    <div class="pa-6 list-info">
+                      <div class="item">
+                        <div>Ngày sinh</div>
+                        <div v-if="userDetailInfo[0] && userDetailInfo[0].dob">
+                          {{ _dayjs(userDetailInfo[0].dob).format('DD/MM/YYYY') }}
+                        </div>
+                      </div>
+                      <div class="item">
+                        <div>Địa chỉ</div>
+                        <div v-if="userDetailInfo[0] && userDetailInfo[0].address">
+                          {{ userDetailInfo[0].address }}
+                        </div>
+                      </div>
+                      <div class="item">
+                        <div>Số điện thoại</div>
+                        <div v-if="userDetailInfo[0] && userDetailInfo[0].phoneNum">
+                          {{ userDetailInfo[0].phoneNum }}
                         </div>
                       </div>
                       <div class="border-vertical"></div>
@@ -115,30 +154,99 @@
                   </v-col>
                   <v-col md="4">
                     <div class="pa-6 list-info">
+                      <div class="item" v-if="userDetailInfo[0] && userDetailInfo[0].major">
+                        <div>Khoa</div>
+                        <div>
+                          {{ userDetailInfo[0].major }}
+                        </div>
+                      </div>
+                      <div class="item" v-if="userDetailInfo[0] && userDetailInfo[0].academicDegree">
+                        <div>Học vị</div>
+                        <div>
+                          {{ userDetailInfo[0].academicDegree }}
+                        </div>
+                      </div>
+                      <div class="item" v-if="userDetailInfo[0] && userDetailInfo[0].moralEducation">
+                        <div>Học hàm</div>
+                        <div>
+                          {{ userDetailInfo[0].moralEducation }}
+                        </div>
+                      </div>
+                      <div class="border-vertical"></div>
+                    </div>
+                  </v-col>
+                </v-row>
+              </v-col>
+              <v-col md="10" v-else>
+                <v-row no-gutters>
+                  <v-col md="4">
+                    <div class="pa-6 list-info">
                       <div class="item">
-                        <div>Country</div>
-                        <div v-if="userDetailInfo.details.nationality">
-                          {{ userDetailInfo.details.nationality }}
+                        <div>Họ và tên</div>
+                        <div v-if="userDetailInfo[0] && userDetailInfo[0].studentName">
+                          {{ userDetailInfo[0].studentName }}
                         </div>
                       </div>
                       <div class="item">
-                        <div>Living address</div>
-                        <div v-if="userDetailInfo.details.address">
-                          {{ userDetailInfo.details.address }}
+                        <div>Kiểu tài khoản</div>
+                        <div>
+                          {{ currentUser.user.accountTypeName }}
                         </div>
                       </div>
                       <div class="item">
-                        <div>Living city</div>
-                        <div v-if="userDetailInfo.details.city">
-                          {{ userDetailInfo.details.city }}
+                        <div>Giới tính</div>
+                        <div v-if="userDetailInfo[0] && userDetailInfo[0].gender">
+                          {{ userDetailInfo[0].gender ? 'Nam' : 'Nữ' }}
+                        </div>
+                      </div>
+
+                      <div class="border-vertical"></div>
+                    </div>
+                  </v-col>
+                  <v-col md="4">
+                    <div class="pa-6 list-info">
+                      <div class="item">
+                        <div>Ngày sinh</div>
+                        <div v-if="userDetailInfo[0] && userDetailInfo[0].dob">
+                          {{ _dayjs(userDetailInfo[0].dob).format('DD/MM/YYYY') }}
                         </div>
                       </div>
                       <div class="item">
-                        <div>Living district</div>
-                        <div v-if="userDetailInfo.details.district">
-                          {{ userDetailInfo.details.district }}
+                        <div>Địa chỉ</div>
+                        <div v-if="userDetailInfo[0] && userDetailInfo[0].address">
+                          {{ userDetailInfo[0].address }}
                         </div>
                       </div>
+                      <div class="item">
+                        <div>Số điện thoại</div>
+                        <div v-if="userDetailInfo[0] && userDetailInfo[0].phoneNum">
+                          {{ userDetailInfo[0].phoneNum }}
+                        </div>
+                      </div>
+                      <div class="border-vertical"></div>
+                    </div>
+                  </v-col>
+                  <v-col md="4">
+                    <div class="pa-6 list-info">
+                      <div class="item" v-if="userDetailInfo[0] && userDetailInfo[0].major">
+                        <div>Khoa</div>
+                        <div>
+                          {{ userDetailInfo[0].major }}
+                        </div>
+                      </div>
+                      <div class="item" v-if="userDetailInfo[0] && userDetailInfo[0].academicDegree">
+                        <div>Học vị</div>
+                        <div>
+                          {{ userDetailInfo[0].academicDegree }}
+                        </div>
+                      </div>
+                      <div class="item" v-if="userDetailInfo[0] && userDetailInfo[0].classCode">
+                        <div>Lớp</div>
+                        <div>
+                          {{ userDetailInfo[0].classCode }}
+                        </div>
+                      </div>
+                      <div class="border-vertical"></div>
                     </div>
                   </v-col>
                 </v-row>
@@ -154,7 +262,6 @@
 <script>
 import dayjs from 'dayjs'
 import { my_profile } from '@/api/my-profile.js'
-import { account_managerment } from '@/api/account-management.js'
 
 export default {
   components: {},
@@ -166,7 +273,6 @@ export default {
       fileInput: '',
       checkImage: false,
       MAX_SIZE_IMAGE: 500,
-      currentCenter: JSON.parse(localStorage.getItem('currentCenter')),
     }
   },
   created() {
@@ -175,21 +281,46 @@ export default {
   methods: {
     async init() {
       this.isLoading = true
-      await my_profile
-        .getDetailUserInfo(this.currentUser.userInfo.userID) //this.currentUser.userInfo.userID
-        .then(res => {
-          if (res) {
-            this.userDetailInfo = res
-          }
-        })
-        .finally(() => {
-          this.isLoading = false
-        })
+      if (this.currentUser.user.roleid === 1) {
+        await my_profile
+          .getDetailAdminInfo(this.currentUser.user.userID) //this.currentUser.userID
+          .then(res => {
+            if (res) {
+              this.userDetailInfo = res
+            }
+          })
+          .finally(() => {
+            this.isLoading = false
+          })
+      }
+      else if (this.currentUser.user.roleid === 2) {
+        await my_profile
+          .getDetailInstructorInfo(this.currentUser.user.userID) //this.currentUser.userID
+          .then(res => {
+            if (res) {
+              this.userDetailInfo = res
+            }
+          })
+          .finally(() => {
+            this.isLoading = false
+          })
+      } else {
+        await my_profile
+          .getDetailStudentInfo(this.currentUser.user.userID) //this.currentUser.userID
+          .then(res => {
+            if (res) {
+              this.userDetailInfo = res
+            }
+          })
+          .finally(() => {
+            this.isLoading = false
+          })
+      }
     },
     edit() {
       this.$router.push({
         name: 'my-profile-edit',
-        params: { userId: this.currentUser.userInfo.userID }, //this.currentUser.userInfo.userID
+        params: { userId: this.currentUser.user.userID }, //this.currentUser.userID
       })
     },
     changePassword() {
@@ -212,11 +343,11 @@ export default {
         var formData = new FormData()
         formData.append('files', imagefile.files[0] ? imagefile.files[0] : null)
       }
-      account_managerment.updateAvatar(formData).then(res => {
-        if (res) {
-          console.log(res)
-        }
-      })
+      // account_managerment.updateAvatar(formData).then(res => {
+      //   if (res) {
+      //     console.log(res)
+      //   }
+      // })
       setTimeout(() => {
         this.init()
       }, 600)
@@ -226,7 +357,7 @@ export default {
       var vm = this
 
       reader.onload = e => {
-        vm.userDetailInfo.details.photo = e.target.result
+        vm.userDetailInfo.image = e.target.result
       }
       reader.readAsDataURL(file)
     },

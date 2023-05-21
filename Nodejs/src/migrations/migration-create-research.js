@@ -11,6 +11,9 @@ module.exports = {
       researchTitle: {
         type: Sequelize.STRING,
       },
+      researchLevel: {
+        type: Sequelize.STRING,
+      },
       description: {
         type: Sequelize.TEXT,
       },
@@ -19,6 +22,18 @@ module.exports = {
       },
       duration: {
         type: Sequelize.STRING,
+      },
+      progress: {
+        type: Sequelize.STRING,
+      },
+      evaluationDate: {
+        type: Sequelize.DATE,
+      },
+      evaluationResult: {
+        type: Sequelize.STRING,
+      },
+      budget: {
+        type: Sequelize.INTEGER,
       },
       leaderID: {
         type: Sequelize.INTEGER,
@@ -33,6 +48,9 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       councilCircularID: {
+        type: Sequelize.INTEGER,
+      },
+      auditCircularID: {
         type: Sequelize.INTEGER,
       },
       councilMembers: {

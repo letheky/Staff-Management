@@ -23,16 +23,16 @@ module.exports = {
       members: {
         type: Sequelize.TEXT,
       },
-      members: {
+      evaluationDate: {
+        type: Sequelize.DATE,
+      },
+      evaluationResult: {
         type: Sequelize.STRING,
       },
       allocationCircularID: {
         type: Sequelize.INTEGER,
       },
       councilCircularID: {
-        type: Sequelize.INTEGER,
-      },
-      auditCircularID: {
         type: Sequelize.INTEGER,
       },
       councilMembers: {

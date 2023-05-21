@@ -4,7 +4,7 @@
       <v-col md="4">
         <div class="pa-6">
           <router-link :to="{ name: 'login' }">
-            <img src="@/assets/images/logo-white.svg" />
+            <img src="@/assets/logo.png" />
           </router-link>
           <h1 class="white--text slogan-action">
             Be confident to reach your dream

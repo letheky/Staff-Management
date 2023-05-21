@@ -14,6 +14,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Circular.init({
+    
+    circularID: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER,
+    },
+    circularType: DataTypes.STRING,
     circularName: DataTypes.STRING,
     circularImage: DataTypes.STRING,
   }, {

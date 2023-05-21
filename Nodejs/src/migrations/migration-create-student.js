@@ -8,6 +8,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      stu_userID: {
+        type: Sequelize.INTEGER,
+      },
       studentName: {
         type: Sequelize.STRING
       },
@@ -23,7 +26,7 @@ module.exports = {
       gender: {
         type: Sequelize.BOOLEAN
       },
-      class: {
+      classCode: {
         type: Sequelize.STRING
       },
       major: {

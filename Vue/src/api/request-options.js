@@ -63,8 +63,8 @@ export const requestOptions = {
 
 function headers() {
   const currentUser = JSON.parse(localStorage.getItem("currentUser")) || {};
-  const authHeader = currentUser.token
-    ? { Authorization: "Bearer " + currentUser.token }
+  const authHeader = currentUser?.user?.token
+    ? { Authorization: "Bearer " + currentUser?.user?.token }
     : {};
   return {
     headers: {
@@ -76,8 +76,8 @@ function headers() {
 
 function headerImages() {
   const currentUser = JSON.parse(localStorage.getItem("currentUser")) || {};
-  const authHeader = currentUser.token
-    ? { Authorization: "Bearer " + currentUser.token }
+  const authHeader = currentUser?.user?.token
+    ? { Authorization: "Bearer " + currentUser?.user?.token }
     : {};
   return {
     headers: {

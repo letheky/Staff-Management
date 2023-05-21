@@ -7,7 +7,7 @@
           <h2>
             <v-icon @click="back()">arrow_back_ios</v-icon>
           </h2>
-          <h2 class="pt-1">Change password</h2>
+          <h2 class="pt-1">Đổi mật khẩu</h2>
           <div v-if="code == 200" class="success">
             <v-alert
               :value="checkSuccess"
@@ -15,7 +15,7 @@
               type="success"
               style="font-size: 14px; padding: 12px"
             >
-              Reset password successfully!
+              Đổi mật khẩu thành công!
             </v-alert>
           </div>
         </div>
@@ -26,28 +26,11 @@
                 <div>
                   <validation-provider
                     v-slot="{ errors }"
-                    name="oldPassword"
-                    rules="required"
-                  >
-                    <v-text-field
-                      label="Old password"
-                      :append-icon="passTypeOldPass ? 'mdi-eye' : 'mdi-eye-off'"
-                      :type="passTypeOldPass ? 'text' : 'password'"
-                      @click:append="passTypeOldPass = !passTypeOldPass"
-                      :error-messages="errors"
-                      @keydown="loginErrorMessage = false"
-                      v-model="oldPassword"
-                      required
-                      outlined
-                    ></v-text-field>
-                  </validation-provider>
-                  <validation-provider
-                    v-slot="{ errors }"
                     name="newPassword"
                     rules="required"
                   >
                     <v-text-field
-                      label="New password"
+                      label="Mật khẩu mới"
                       :append-icon="passTypeNewPass ? 'mdi-eye' : 'mdi-eye-off'"
                       :type="passTypeNewPass ? 'text' : 'password'"
                       @click:append="passTypeNewPass = !passTypeNewPass"
@@ -64,7 +47,7 @@
                     rules="required"
                   >
                     <v-text-field
-                      label="Confirm new password"
+                      label="Nhập lại mật khẩu mới"
                       :append-icon="
                         passTypeReNewPass ? 'mdi-eye' : 'mdi-eye-off'
                       "
@@ -91,7 +74,6 @@
                     type="submit"
                     @click="dialog = true"
                     :disabled="
-                      !oldPassword ||
                       !newPassword ||
                       !confirmNewPassword ||
                       newPassword != confirmNewPassword
@@ -137,7 +119,7 @@ import {
   setInteractionMode,
 } from "vee-validate";
 setInteractionMode("eager");
-const querystring = require("querystring");
+// const querystring = require("querystring");
 export default {
   name: "ChangePassword",
   components: {
@@ -148,37 +130,32 @@ export default {
   data() {
     return {
       valid: true,
-      oldPassword: null,
       newPassword: null,
       confirmNewPassword: null,
       isLoading: false,
       message: this.$t("VIETNAMESE"),
-      passTypeOldPass: false,
       passTypeNewPass: false,
       passTypeReNewPass: false,
       loginErrorMessage: "",
       status: false,
       code: "",
+      userID: JSON.parse(localStorage.getItem("currentUser")).user.userID,
       currentUser: JSON.parse(localStorage.getItem("currentUser")),
-      userName: "",
-      fullName: "",
       dialog: false,
     };
   },
   created() {
-    this.userName = this.currentUser.userInfo.userName;
-    this.fullName = this.currentUser.userInfo.fullName;
   },
   methods: {
     validate() {
       if (this.valid) {
         this.isLoading = true;
         const body = {
-          oldPassword: this.oldPassword,
+          userID: this.userID,
           newPassword: this.newPassword,
         };
         my_profile
-          .changePassword(querystring.stringify(body))
+          .changePassword(body)
           .then((res) => {
             this.code = res.code;
             if (res.code == 200) {

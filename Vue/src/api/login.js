@@ -1,66 +1,41 @@
-import {
-  ROOT,
-  ADMIN_LOGIN,
-  GET_FUNCTION_OF_ROLE,
-  FORGOT_PASSWORD,
-  USER_RESET_PASSWORD,
-} from "@/api/constant.js";
-import { handleResponse } from "@/api/handle-response";
-import { requestOptions } from "@/api/request-options";
-import { BehaviorSubject } from "rxjs";
+import { ROOT, USER_REGISTER, USER_LOGIN, USER_CHANGEPASSWORD } from '@/api/constant.js'
+import { handleResponse } from '@/api/handle-response'
+import { requestOptions } from '@/api/request-options'
+import { BehaviorSubject } from 'rxjs'
 
-const currentUserSubject = new BehaviorSubject(
-  JSON.parse(localStorage.getItem("currentUser"))
-);
+const currentUserSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('currentUser')))
 
 function login(data) {
-  return fetch(ROOT + ADMIN_LOGIN, requestOptions.postBody(data))
+  return fetch(ROOT + USER_LOGIN, requestOptions.postBody(data))
     .then(handleResponse)
-    .then((data) => {
-      return data;
-    });
+    .then(data => {
+      return data
+    })
 }
-
-function functionOfRole(data) {
-  return fetch(ROOT + GET_FUNCTION_OF_ROLE + data, requestOptions.get())
+function register(data) {
+  return fetch(ROOT + USER_REGISTER, requestOptions.postImage(data))
     .then(handleResponse)
-    .then((data) => {
-      return data;
-    });
+    .then(data => {
+      return data
+    })
 }
-
-function forgotPassword(data) {
-  return fetch(
-    ROOT + FORGOT_PASSWORD + "?userName=" + data,
-    requestOptions.putNoBody()
-  )
+function changePassword(data) {
+  return fetch(ROOT + USER_CHANGEPASSWORD, requestOptions.postBody(data))
     .then(handleResponse)
-    .then((data) => {
-      return data;
-    });
-}
-
-function resetPassword(token, password) {
-  return fetch(
-    ROOT + USER_RESET_PASSWORD + "?token=" + token + "&password=" + password,
-    requestOptions.putNoBody()
-  )
-    .then(handleResponse)
-    .then((data) => {
-      return data;
-    });
+    .then(data => {
+      return data
+    })
 }
 
 function logout() {
   // remove user from local storage to log user out
-  localStorage.clear();
-  currentUserSubject.next(null);
+  localStorage.clear()
+  currentUserSubject.next(null)
 }
 
 export const loginadmin = {
   login,
-  functionOfRole,
   logout,
-  forgotPassword,
-  resetPassword,
-};
+  register,
+  changePassword,
+}

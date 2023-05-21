@@ -36,158 +36,137 @@
       </div>
     </template>
     <template v-else>
-      <v-row no-gutters>
-        <v-col md="12">
-          <div class="px-6">
-            <v-form>
-              <v-row>
-                <v-col>
-                  <!-- <template v-if="1 == 'admin'"> -->
-                  <v-row>
-                    <v-col>
-                      <v-text-field
-                        label="First name"
-                        outlined
-                        dense
-                        v-model="firstName"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col>
-                      <v-text-field
-                        label="Mid name"
-                        outlined
-                        dense
-                        v-model="middleName"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col>
-                      <v-text-field
-                        label="Last name"
-                        outlined
-                        dense
-                        v-model="lastName"
-                      ></v-text-field>
-                    </v-col>
-                  </v-row>
-                  <v-text-field
-                    label="Full name"
-                    outlined
-                    dense
-                    v-model="fullName"
-                    disabled
-                  ></v-text-field>
-                  <!-- </template> -->
-                  <label>Gender *</label>
-                  <v-radio-group v-model="gender" required row class="mt-0">
-                    <v-radio label="Male" value="M"> </v-radio>
-                    <v-radio label="Female" value="F"> </v-radio>
-                  </v-radio-group>
-                  <date-picker
-                    class="pb-4"
-                    :model="dob"
-                    @update:model="updateDob"
-                    title="Date of birth"
-                  ></date-picker>
-                  <v-autocomplete
-                    label="Country"
-                    outlined
-                    dense
-                    :items="countries"
-                    item-text="nationality"
-                    item-value="nationalityID"
-                    v-model="nationality"
-                  ></v-autocomplete>
-                  <v-row>
-                    <v-col>
-                      <v-autocomplete
-                        label="Living City"
-                        outlined
-                        dense
-                        :items="cities"
-                        item-text="city"
-                        item-value="cityID"
-                        v-model="city"
-                      ></v-autocomplete>
-                    </v-col>
-                    <v-col>
-                      <v-autocomplete
-                        label="Living district"
-                        outlined
-                        dense
-                        :items="districts"
-                        item-text="district"
-                        item-value="districtID"
-                        v-model="district"
-                      ></v-autocomplete>
-                    </v-col>
-                  </v-row>
+      <v-col md="12">
+        <div class="px-6">
+          <v-form>
+            <v-row>
+              <v-col cols="6">
+                <v-text-field
+                  v-if="roleID === 1"
+                  label="Họ và tên"
+                  outlined
+                  dense
+                  v-model="adminName"
+                ></v-text-field>
+                <v-text-field
+                  v-else-if="roleID === 2"
+                  label="Họ và tên"
+                  outlined
+                  dense
+                  v-model="instructorName"
+                ></v-text-field>
+                <v-text-field
+                  v-else
+                  label="Họ và tên"
+                  outlined
+                  dense
+                  v-model="studentName"
+                ></v-text-field>
+              </v-col>
+              <v-col cols="6">
+                <v-text-field
+                  v-if="roleID === 2"
+                  label="Học hàm"
+                  outlined
+                  dense
+                  v-model="moralEducation"
+                ></v-text-field>
+                <v-text-field
+                  v-else-if="roleID === 3"
+                  label="Lớp"
+                  outlined
+                  dense
+                  v-model="classCode"
+                ></v-text-field>
+              </v-col>
+            </v-row>
+            <!-- </template> -->
+            <v-row>
+              <v-col cols="6">
+                <label>Giới tính *</label>
+                <v-radio-group v-model="gender" required row class="mt-0">
+                  <v-radio label="Nam" :value="true"> </v-radio>
+                  <v-radio label="Nữ" :value="false"> </v-radio>
+                </v-radio-group>
+              </v-col>
+              <v-col cols="6">
+                <v-text-field
+                  v-if="academicDegree"
+                  label="Học vị"
+                  outlined
+                  dense
+                  v-model="academicDegree"
+                ></v-text-field>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="6">
+                <date-picker
+                  class="pb-4"
+                  :model="dob"
+                  @update:model="updateDob"
+                  title="Ngày sinh"
+                ></date-picker>
+              </v-col>
+              <v-col cols="6">
+                <v-text-field
+                  v-if="major"
+                  label="Chuyên ngành"
+                  outlined
+                  dense
+                  v-model="major"
+                ></v-text-field>
+              </v-col>
+            </v-row>
 
-                  <v-text-field
-                    label="Living address"
-                    maxlength="300"
-                    outlined
-                    dense
-                    v-model="address"
-                  ></v-text-field>
-                </v-col>
-                <v-col>
-                  <v-text-field
-                    label="Home phone"
-                    type="number"
-                    outlined
-                    dense
-                    v-model="homePhone"
-                  ></v-text-field>
-                  <v-text-field
-                    label="Mobile phone"
-                    type="number"
-                    outlined
-                    dense
-                    v-model="mobilePhone"
-                  ></v-text-field>
-                  <template>
-                    <v-text-field
-                      label="Email *"
-                      :rules="emailRules"
-                      outlined
-                      dense
-                      v-model="email"
-                    ></v-text-field>
-                  </template>
-                </v-col>
-              </v-row>
-            </v-form>
-          </div>
-        </v-col>
-      </v-row>
-      <v-footer fixed absolute height="60" color="#fff" class="pl-10 pr-10">
-        <v-row>
-          <v-col>
+            <v-row>
+              <v-col>
+                <v-text-field
+                  label="Living address"
+                  maxlength="300"
+                  outlined
+                  dense
+                  v-model="address"
+                ></v-text-field>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
+                <v-text-field
+                  label="Số điện thoại"
+                  type="number"
+                  outlined
+                  dense
+                  v-model="phoneNum"
+                ></v-text-field>
+              </v-col>
+            </v-row>
+          </v-form>
+        </div>
+      </v-col>
+
+      <v-footer
+        :style="{ position: 'sticky !important' }"
+        height="60"
+        style="width: 100%"
+        color="#fff"
+        class="pl-10 pr-10"
+        v-if="!isLoading"
+      >
+        <div class="d-flex justify-end" style="width: 100%">
+          <div class="d-flex flex-row-reverse align-center" style="width: 100%">
             <v-btn
-              outlined
-              small
-              elevation="0"
-              color="error"
-              height="36"
-              class="pl-16 pr-16 mr-5"
-              @click="back()"
-              >Cancel</v-btn
-            >
-            <v-btn
-              small
-              elevation="0"
-              color="secondary"
-              height="36"
-              class="pl-16 pr-16"
+              class="mr-3"
+              color="primary"
               @click="
                 dialog = true
                 save()
               "
-              :disabled="!gender || !mobilePhone || !email"
-              >Save</v-btn
+              >Lưu dữ liệu</v-btn
             >
-          </v-col>
-        </v-row>
+            <v-btn class="mr-3" @click="back()">Quay lại</v-btn>
+          </div>
+        </div>
       </v-footer>
     </template>
     <v-row justify="center">
@@ -214,7 +193,6 @@
 </template>
 
 <script>
-import { nationalities } from '@/api/nationalities.js'
 import { my_profile } from '@/api/my-profile.js'
 import dayjs from 'dayjs'
 import DatePicker from '@/components/Utils/DatePicker.vue'
@@ -225,219 +203,268 @@ export default {
   },
   data() {
     return {
-      emailRules: [
-        v =>
-          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-            v
-          ) || 'Email must be valid',
-      ],
-      gender: '',
-      dob: '',
-      nationality: '',
-      city: '',
-      district: '',
+      gender: false,
+      dob: dayjs(new Date()).format('YYYY-MM-DD'),
       address: '',
-      homePhone: '',
-      mobilePhone: '',
-      email: '',
-      firstName: '',
-      fullName: '',
-      lastName: '',
-      middleName: '',
+      adminID: 0,
+      studentID: 0,
+      instructorID: 0,
+      adminName: '',
+      studentName: '',
+      instructorName: '',
+      moralEducation: '',
+      academicDegree: '',
+      phoneNum: '',
+      classCode: '',
+      major: '',
       userID: this.$route.params.userId,
       isLoading: false,
-      countries: [],
-      cities: [],
       currentUser: JSON.parse(localStorage.getItem('currentUser')),
-      districts: [],
-      status: [
-        { label: 'Public', value: 1 },
-        { label: 'Private', value: 0 },
-      ],
+      roleID: JSON.parse(localStorage.getItem('currentUser')).user.roleid,
       message: '',
       checkSuccess: false,
       checkFailed: false,
       dialog: false,
     }
   },
-  watch: {
-    city: function (newData) {
-      nationalities.getDistrictsByCity(newData).then(res => {
-        if (res) {
-          this.districts = res
-        }
-      })
-    },
-    firstName: function (value) {
-      this.fullName = value + ' ' + this.middleName + ' ' + this.lastName
-    },
-    middleName: function (value) {
-      this.fullName = this.firstName + ' ' + value + ' ' + this.lastName
-    },
-    lastName: function (value) {
-      this.fullName = this.firstName + ' ' + this.middleName + ' ' + value
-    },
-  },
+  watch: {},
   created() {
     this.init()
-    if (this.currentUser.userInfo.accountTypeID === 1) {
-      this.back()
-    }
   },
   methods: {
     async init() {
       this.isLoading = true
-      await nationalities.getCountries().then(res => {
-        if (res) {
-          this.countries = res
-        }
-      })
-      await nationalities.getCities().then(res => {
-        if (res) {
-          this.cities = res
-        }
-      })
-
-      await my_profile.getDetailUserInfo(this.userID).then(res => {
-        if (res) {
-          this.gender = res.details.gender
-          if (this.dob) {
-            this.dob = this._dayjs(res.details.dob).format('YYYY-MM-DD')
-          }
-          this.nationality = res.details.nationalityID
-          this.city = res.details.cityID
-          this.district = res.details.districtID
-          this.address = res.details.address
-          this.homePhone = res.details.homePhone
-          this.mobilePhone = res.details.mobilePhone
-          this.email = res.details.email
-          this.firstName = res.details.firstName
-          this.fullName = res.details.fullName
-          this.lastName = res.details.lastName
-          this.middleName = res.details.middleName
-        }
-      })
+      if (this.currentUser.user.roleid === 1) {
+        await my_profile
+          .getDetailAdminInfo(this.userID)
+          .then(res => {
+            if (res.length>0) {
+              this.adminID = res[0].adminID ? res[0].adminID : 0
+              this.instructorID = res[0].instructorID ? res[0].instructorID : 0
+              this.studentID = res[0].studentID ? res[0].studentID : 0
+              this.gender = res[0].gender
+              if (this.dob) {
+                this.dob = dayjs(res[0].dob).format('YYYY-MM-DD')
+              }
+              this.address = res[0].address
+              this.adminName = res[0].adminName
+              this.phoneNum = res[0].phoneNum
+            }
+          })
+          .finally(() => {
+            this.isLoading = false
+          })
+      }
+      if (this.currentUser.user.roleid === 2) {
+        await my_profile
+          .getDetailInstructorInfo(this.userID)
+          .then(res => {
+             if (res.length>0) {
+              this.gender = res[0].gender
+              this.adminID = res[0].adminID ? res[0].adminID : 0
+              this.instructorID = res[0].instructorID ? res[0].instructorID : 0
+              this.studentID = res[0].studentID ? res[0].studentID : 0
+              if (this.dob) {
+                this.dob = this._dayjs(res[0].dob).format('YYYY-MM-DD')
+              }
+              this.address = res[0].address
+              this.instructorName = res[0].instructorName
+              this.phoneNum = res[0].phoneNum
+              this.moralEducation = res[0].moralEducation
+              this.academicDegree = res[0].academicDegree
+              this.major = res[0].major
+            }
+          })
+          .finally(() => {
+            this.isLoading = false
+          })
+      } else {
+        await my_profile
+          .getDetailStudentInfo(this.userID)
+          .then(res => {
+             if (res.length>0) {
+              this.gender = res[0].gender
+              this.adminID = res[0].adminID ? res[0].adminID : 0
+              this.instructorID = res[0].instructorID ? res[0].instructorID : 0
+              this.studentID = res[0].studentID ? res[0].studentID : 0
+              if (this.dob) {
+                this.dob = this._dayjs(res[0].dob).format('YYYY-MM-DD')
+              }
+              this.address = res[0].address
+              this.studentName = res[0].studentName
+              this.phoneNum = res[0].phoneNum
+              this.classCode = res[0].classCode
+              this.academicDegree = res[0].academicDegree
+              this.major = res[0].major
+            }
+          })
+          .finally(() => {
+            this.isLoading = false
+          })
+      }
       this.isLoading = false
     },
     back() {
       window.history.back()
     },
     save() {
-      const body = {
-        userID: this.userID,
-        role: {
-          locationID: 0,
-          groupID: 0,
-          accountTypeID: 0,
-        },
-        detail: {
-          address: this.address,
-          cityID: this.city,
-          districtID: this.district,
-          dob: this.dob,
-          email: this.email,
-          gender: this.gender,
-          homePhone: this.homePhone,
-          mobilePhone: this.mobilePhone,
-          nationalityID: this.nationality,
-          officePhone: '',
-          firstName: this.firstName,
-          fullName: this.fullName,
-          lastName: this.lastName,
-          middleName: this.middleName,
-        },
-        student: {
-          hobbies: '',
-          contactName: '',
-          officePhone: '',
-          motherName: '',
-          motherPhone: '',
-          fatherName: '',
-          fatherPhone: '',
-          counselorID: 0,
-          entryDate: '2021-12-09T17:34:56.934Z',
-          occupationID: 0,
-          schoolID: 0,
-          companyID: 0,
-          contractID: 0,
-          taxCode: 'xxxxxxxxxx',
-          sourceID: 0,
-          remarks: '',
-          locationID: 0,
-          isDeleted: true,
-          lUpdUser: 'string',
-          lUpdDate: '2021-12-09T17:34:56.934Z',
-          studentBalAmount: 0,
-          companyName: '',
-          customerTypeID: 0,
-          customerGroupID: 0,
-          searchName: '',
-          studentARBalance: 0,
-          prospectID: 0,
-          prospectCode: '',
-          englishSchool: '',
-          englishBook: '',
-          psClass: '',
-          agencyID: 0,
-          acceptReceiveEmail: true,
-          acceptReceiveSMS: true,
-          identification: '',
-          passport: '',
-          channelID: 0,
-          oldStudentCode: '',
-          oldStudentID: 0,
-          isFirstSteps: true,
-          referralID: 0,
-          englishSchoolTemp: '',
-          schoolTemp: '',
-          guardianID: 0,
-          sourceReferenceNote: '',
-          ieltsBandScore: 0,
-          studyPurposeID: 0,
-          relatives: [],
-        },
-        teacher: {
-          teacherGroupID: 0,
-          departmentID: 0,
-          locationID: 0,
-          startDate: '2021-12-09T17:34:56.934Z',
-          endDate: '2021-12-09T17:34:56.934Z',
-          teacherSalaryTypeID: 0,
-          currencyID: 'VND',
-          salaryPerHours: 0,
-          salaryPerMonth: 0,
-          passportNo: '',
-          passportExpiredDate: '2021-12-09T17:34:56.934Z',
-          visaNo: '',
-          visaExpriedDate: '2021-12-09T17:34:56.934Z',
-          notes: '',
-          inactive: true,
-          lUpdUser: 'string',
-          lUpdDate: '2021-12-09T17:34:56.934Z',
-          teacherTypeID: 0,
-          searchName: '',
-          scaleID: 0,
-        },
+      const bodyUpdate = {
+        adminID: this.adminID,
+        instructorID: this.instructorID,
+        studentID: this.studentID,
+        instructorName: this.instructorName,
+        studentName: this.studentName,
+        adminName: this.adminName,
+        dob: this.dob,
+        gender: this.gender,
+        address: this.address,
+        phoneNum: this.phoneNum,
+        major: this.major,
+        academicDegree: this.academicDegree,
+        moralEducation: this.moralEducation,
+        classCode: this.classCode,
       }
-      my_profile.updateDetailUserInfo(body).then(res => {
-        this.message = res.message
-        if (res.message == 'Update Successfull') {
-          this.dialog = true
-          this.checkSuccess = true
-          setTimeout(() => {
-            this.checkSuccess = false
-            this.$router.push({ name: 'my-profile' })
-          }, 2000)
-          this.dialog = false
+      const bodyCreate = {
+        admin_userID: this.userID,
+        instructor_userID: this.userID,
+        stu_userID: this.userID,
+        instructorName: this.instructorName,
+        studentName: this.studentName,
+        adminName: this.adminName,
+        dob: this.dob,
+        gender: this.gender,
+        address: this.address,
+        phoneNum: this.phoneNum,
+        major: this.major,
+        academicDegree: this.academicDegree,
+        moralEducation: this.moralEducation,
+        classCode: this.classCode,
+      }
+      if (this.adminName || this.studentName || this.instructorName) {
+        if (this.roleID === 1) {
+          my_profile.createDetailAdminInfo(bodyCreate).then(res => {
+            this.message = res.message
+            if (res.message == 'Admin created') {
+              this.dialog = true
+              this.checkSuccess = true
+              setTimeout(() => {
+                this.checkSuccess = false
+                this.$router.push({ name: 'my-profile' })
+              }, 2000)
+              this.dialog = false
+            } else {
+              this.dialog = true
+              this.checkFailed = true
+              setTimeout(() => {
+                this.checkFailed = false
+              }, 2000)
+              this.dialog = false
+            }
+          })
+        } else if (this.roleID === 2) {
+          my_profile.createDetailInstructorInfo(bodyCreate).then(res => {
+            this.message = res.message
+            if (res.message == 'Instructor created') {
+              this.dialog = true
+              this.checkSuccess = true
+              setTimeout(() => {
+                this.checkSuccess = false
+                this.$router.push({ name: 'my-profile' })
+              }, 2000)
+              this.dialog = false
+            } else {
+              this.dialog = true
+              this.checkFailed = true
+              setTimeout(() => {
+                this.checkFailed = false
+              }, 2000)
+              this.dialog = false
+            }
+          })
         } else {
-          this.dialog = true
-          this.checkFailed = true
-          setTimeout(() => {
-            this.checkFailed = false
-          }, 2000)
-          this.dialog = false
+          my_profile.createDetailStudentInfo(bodyCreate).then(res => {
+            this.message = res.message
+            if (res.message == 'Student created') {
+              this.dialog = true
+              this.checkSuccess = true
+              setTimeout(() => {
+                this.checkSuccess = false
+                this.$router.push({ name: 'my-profile' })
+              }, 2000)
+              this.dialog = false
+            } else {
+              this.dialog = true
+              this.checkFailed = true
+              setTimeout(() => {
+                this.checkFailed = false
+              }, 2000)
+              this.dialog = false
+            }
+          })
         }
-      })
+      } else {
+        if (this.roleID === 1) {
+          my_profile.updateDetailAdminInfo(bodyUpdate).then(res => {
+            this.message = res.message
+            if (res.message == 'Admin edited successfully') {
+              this.dialog = true
+              this.checkSuccess = true
+              setTimeout(() => {
+                this.checkSuccess = false
+                this.$router.push({ name: 'my-profile' })
+              }, 2000)
+              this.dialog = false
+            } else {
+              this.dialog = true
+              this.checkFailed = true
+              setTimeout(() => {
+                this.checkFailed = false
+              }, 2000)
+              this.dialog = false
+            }
+          })
+        } else if (this.roleID === 2) {
+          my_profile.updateDetailInstructorInfo(bodyUpdate).then(res => {
+            this.message = res.message
+            if (res.message == 'Instructor edited successfully') {
+              this.dialog = true
+              this.checkSuccess = true
+              setTimeout(() => {
+                this.checkSuccess = false
+                this.$router.push({ name: 'my-profile' })
+              }, 2000)
+              this.dialog = false
+            } else {
+              this.dialog = true
+              this.checkFailed = true
+              setTimeout(() => {
+                this.checkFailed = false
+              }, 2000)
+              this.dialog = false
+            }
+          })
+        } else {
+          my_profile.updateDetailStudentInfo(bodyUpdate).then(res => {
+            this.message = res.message
+            if (res.message == 'Student edited successfully') {
+              this.dialog = true
+              this.checkSuccess = true
+              setTimeout(() => {
+                this.checkSuccess = false
+                this.$router.push({ name: 'my-profile' })
+              }, 2000)
+              this.dialog = false
+            } else {
+              this.dialog = true
+              this.checkFailed = true
+              setTimeout(() => {
+                this.checkFailed = false
+              }, 2000)
+              this.dialog = false
+            }
+          })
+        }
+      }
     },
     updateDob(event) {
       this.dob = event

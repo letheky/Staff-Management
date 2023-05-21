@@ -8,6 +8,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
+      circularType: {
+        type: Sequelize.STRING,
+      },
       circularName: {
         type: Sequelize.STRING,
       },

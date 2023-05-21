@@ -14,6 +14,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Seminar.init({
+    
+    seminarID: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER,
+    },
     seminarName: DataTypes.STRING,
     seminarPlan: DataTypes.STRING,
     peopleAssignNum: DataTypes.INTEGER,

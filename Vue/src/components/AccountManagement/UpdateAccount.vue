@@ -808,26 +808,6 @@ export default {
   },
   methods: {
     filterDistrictByCity() {
-      this.userDetailInfo.details.district = []
-      nationalities.getDistrictsByCity(this.userDetailInfo.details.city).then(res => {
-        this.districts = []
-        this.districts = res.map(x => {
-          return {
-            district: x.district,
-            districtID: x.districtID,
-          }
-        })
-      })
-      this.userDetailInfo.details.school = []
-      account_managerment.getListSchool(this.userDetailInfo.details.city).then(res => {
-        this.schools = []
-        this.schools = res.map(x => {
-          return {
-            school: x.school,
-            schoolID: x.schoolID,
-          }
-        })
-      })
     },
     onFileChange(e) {
       var size_image = e.target.files[0].size / 1024
@@ -879,91 +859,6 @@ export default {
     },
     async init() {
       this.isLoading = true
-      await nationalities.getCountries().then(res => {
-        if (res) {
-          this.countries = res
-        }
-      })
-      await nationalities.getCities().then(res => {
-        if (res) {
-          this.cities = res
-        }
-      })
-      account_managerment.getListCounselor().then(res => {
-        if (res) {
-          this.counselors = res
-        }
-      })
-      await account_managerment.getListRecordType().then(res => {
-        if (res) {
-          this.customerGroups = res
-        }
-      })
-      await account_managerment.getListReferralBy(this.currentCenter).then(res => {
-        if (res) {
-          this.referralIDs = res
-        }
-      })
-      await account_managerment.getListSourceReference().then(res => {
-        if (res) {
-          this.sources = res
-        }
-      })
-      await account_managerment.getListStudyPurpose().then(res => {
-        if (res) {
-          this.studyPurposes = res
-        }
-      })
-      await account_managerment.getListRelativeTypes().then(res => {
-        if (res) {
-          this.relativeTypes = res
-        }
-      })
-      await account_managerment.getListCenter().then(res => {
-        if (res) {
-          this.centers = res
-        }
-      })
-      await account_managerment.getListGuardians().then(res => {
-        if (res) {
-          this.guardianUserNames = res
-        }
-      })
-      await teacher_information.getListTeacherGroup().then(res => {
-        if (res) {
-          this.teacherGroups = res
-        }
-      })
-      await teacher_information.getListTeacherType().then(res => {
-        if (res) {
-          this.teacherTypes = res
-        }
-      })
-      await teacher_information.getListTeacherRate().then(res => {
-        if (res) {
-          this.teacherRates = res
-        }
-      })
-      await teacher_information.getListTeacherSalaryTypes().then(res => {
-        if (res) {
-          this.salaryTypes = res
-        }
-      })
-      await teacher_information.getListTeacherCurrency().then(res => {
-        if (res) {
-          this.currencies = res
-        }
-      })
-      await account_managerment.getListGroupAdmin().then(res => {
-        if (res) {
-          this.groups = res
-        }
-      })
-      await account_managerment.getListAccountType().then(res => {
-        if (res) {
-          this.accountTypes = res
-        }
-      })
       await my_profile
         .getDetailUserInfo(this.userID) //this.currentUser.userInfo.userID
         .then(res => {
@@ -981,16 +876,6 @@ export default {
             this.lastName = res.details.lastName
             this.firstName = res.details.firstName
             this.middleName = res.details.middleName
-            nationalities.getDistrictsByCity(res.details.cityID).then(res => {
-              if (res) {
-                this.districts = res
-              }
-            })
-            account_managerment.getListSchool(res.details.cityID).then(res => {
-              if (res) {
-                this.schools = res
-              }
-            })
             this.userDetailInfo.details.district = res.details.districtID
             this.counselor = res.studentInfo.counselorID
             this.school = res.studentInfo.schoolID
