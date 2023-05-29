@@ -1,14 +1,15 @@
 import express from "express";
 import homeController from "../controller/homeController";
 import userController from "../controller/userController";
-import studentController from "../controller/studentController";
-import instructorController from "../controller/instructorController";
-import adminController from "../controller/adminController";
-import researchController from "../controller/researchController";
-import topicController from "../controller/topicController";
-import seminarController from "../controller/seminarController";
-import paperController from "../controller/paperController";
-import circularController from "../controller/circularController";
+import departmentController from "../controller/departmentController";
+import contractController from "../controller/contractController";
+import employeeController from "../controller/employeeController";
+import leaveRequestController from "../controller/leaveRequestController";
+import planController from "../controller/planController";
+import promotionController from "../controller/promotionController";
+import qualificationController from "../controller/qualificationController";
+import staffController from "../controller/staffController";
+import teacherController from "../controller/teacherController";
 import authToken from '../middleware/authToken';
 const cors = require('cors');
 const upload = require('../middleware/multer');
@@ -29,66 +30,70 @@ let initWebRoutes = (app) => {
   router.get("/api/getAllUser", authToken.verifyUserToken, userController.getAll);
   router.delete("/api/user/delete", authToken.verifyUserToken, userController.deleteUser);
   
-  //student
-  router.post("/api/student/create", authToken.verifyUserToken ,studentController.create);
-  router.put("/api/student/edit", authToken.verifyUserToken, studentController.put);
-  router.delete("/api/student/delete", authToken.verifyUserToken, studentController.deleteStudent);
-  router.get("/api/student/getAll", authToken.verifyUserToken, studentController.getAll);
-  router.get("/api/student/getStudent", authToken.verifyUserToken, studentController.getStudentByID);
-  router.get("/api/student/getStudentByUserID", authToken.verifyUserToken, studentController.getStudentByUserID);
+  //department
+  router.post("/api/department/create", authToken.verifyUserToken ,departmentController.create);
+  router.put("/api/department/edit", authToken.verifyUserToken, departmentController.put);
+  router.delete("/api/department/delete", authToken.verifyUserToken, departmentController.deleteDepartment);
+  router.get("/api/department/getAll", authToken.verifyUserToken, departmentController.getAll);
+  router.get("/api/department/getDepartment", authToken.verifyUserToken, departmentController.getDepartmentByID);
 
-  //admin
-  router.post("/api/admin/create", authToken.verifyUserToken ,adminController.create);
-  router.put("/api/admin/edit", authToken.verifyUserToken, adminController.put);
-  router.delete("/api/admin/delete", authToken.verifyUserToken, adminController.deleteAdmin);
-  router.get("/api/admin/getAll", authToken.verifyUserToken, adminController.getAll);
-  router.get("/api/admin/getAdmin", authToken.verifyUserToken, adminController.getAdminByID);
-  router.get("/api/admin/getAdminByUserID", authToken.verifyUserToken, adminController.getAdminByUserID);
+  //employee
+  router.post("/api/employee/create", authToken.verifyUserToken ,employeeController.create);
+  router.put("/api/employee/edit", authToken.verifyUserToken, employeeController.put);
+  router.delete("/api/employee/delete", authToken.verifyUserToken, employeeController.deleteEmployee);
+  router.get("/api/employee/getAll", authToken.verifyUserToken, employeeController.getAll);
+  router.get("/api/employee/getEmployee", authToken.verifyUserToken, employeeController.getEmployeeByID);
+  router.get("/api/employee/getActiveEmployee", authToken.verifyUserToken, employeeController.getAllActive);
+  router.put("/api/employee/deActive", authToken.verifyUserToken, employeeController.deActive);
 
-  //instructor
-  router.post("/api/instructor/create", authToken.verifyUserToken ,instructorController.create);
-  router.put("/api/instructor/edit", authToken.verifyUserToken, instructorController.put);
-  router.delete("/api/instructor/delete", authToken.verifyUserToken, instructorController.deleteInstructor);
-  router.get("/api/instructor/getAll", authToken.verifyUserToken, instructorController.getAll);
-  router.get("/api/instructor/getInstructor", authToken.verifyUserToken, instructorController.getInstructorByID);
-    router.get("/api/instructor/getInstructorByUserID", authToken.verifyUserToken, instructorController.getInstructorByUserID);
+  //contract
+  router.post("/api/contract/create", authToken.verifyUserToken ,contractController.create);
+  router.put("/api/contract/edit", authToken.verifyUserToken, contractController.put);
+  router.delete("/api/contract/delete", authToken.verifyUserToken, contractController.deleteContract);
+  router.get("/api/contract/getAll", authToken.verifyUserToken, contractController.getAll);
+  router.get("/api/contract/getContract", authToken.verifyUserToken, contractController.getContractByID);
 
-  //circular
-  router.post("/api/circular/create", authToken.verifyUserToken ,circularController.create);
-  router.put("/api/circular/edit", authToken.verifyUserToken, circularController.put);
-  router.delete("/api/circular/delete", authToken.verifyUserToken, circularController.deleteCircular);
-  router.get("/api/circular/getAll", authToken.verifyUserToken, circularController.getAll);
-  router.get("/api/circular/getCircular", authToken.verifyUserToken, circularController.getCircularByID);
+  //staff
+  router.post("/api/staff/create", authToken.verifyUserToken ,staffController.create);
+  router.put("/api/staff/edit", authToken.verifyUserToken, staffController.put);
+  router.delete("/api/staff/delete", authToken.verifyUserToken, staffController.deleteStaff);
+  router.get("/api/staff/getAll", authToken.verifyUserToken, staffController.getAll);
+  router.get("/api/staff/getStaff", authToken.verifyUserToken, staffController.getStaffByID);
 
-  //topic
-  router.post("/api/topic/create", authToken.verifyUserToken ,topicController.create);
-  router.put("/api/topic/edit", authToken.verifyUserToken, topicController.put);
-  router.delete("/api/topic/delete", authToken.verifyUserToken, topicController.deleteTopic);
-  router.get("/api/topic/getAll", authToken.verifyUserToken, topicController.getAll);
-  router.get("/api/topic/getStudentInResearch", authToken.verifyUserToken, topicController.getStudentInResearch);
-  router.get("/api/topic/getTopic", authToken.verifyUserToken, topicController.getTopicByID);
+  //plan
+  router.post("/api/plan/create", authToken.verifyUserToken ,planController.create);
+  router.put("/api/plan/edit", authToken.verifyUserToken, planController.put);
+  router.delete("/api/plan/delete", authToken.verifyUserToken, planController.deletePlan);
+  router.get("/api/plan/getAll", authToken.verifyUserToken, planController.getAll);
+  router.get("/api/plan/getPlan", authToken.verifyUserToken, planController.getPlanByID);
 
-  //paper
-  router.post("/api/paper/create", authToken.verifyUserToken ,paperController.create);
-  router.put("/api/paper/edit", authToken.verifyUserToken, paperController.put);
-  router.delete("/api/paper/delete", authToken.verifyUserToken, paperController.deletePaper);
-  router.get("/api/paper/getAll", authToken.verifyUserToken, paperController.getAll);
-  router.get("/api/paper/getPaper", authToken.verifyUserToken, paperController.getPaperByID);
+  //qualification
+  router.post("/api/qualification/create", authToken.verifyUserToken ,qualificationController.create);
+  router.put("/api/qualification/edit", authToken.verifyUserToken, qualificationController.put);
+  router.delete("/api/qualification/delete", authToken.verifyUserToken, qualificationController.deleteQualification);
+  router.get("/api/qualification/getAll", authToken.verifyUserToken, qualificationController.getAll);
+  router.get("/api/qualification/getQualification", authToken.verifyUserToken, qualificationController.getQualificationByID);
 
-  //research
-  router.post("/api/research/create", authToken.verifyUserToken ,researchController.create);
-  router.put("/api/research/edit", authToken.verifyUserToken, researchController.put);
-  router.delete("/api/research/delete", authToken.verifyUserToken, researchController.deleteResearch);
-  router.get("/api/research/getAll", authToken.verifyUserToken, researchController.getAll);
-  router.get("/api/research/getInstructorInResearch", authToken.verifyUserToken, researchController.getInstructorInResearch);
-  router.get("/api/research/getResearch", authToken.verifyUserToken, researchController.getResearchByID);
+  //leaveRequest
+  router.post("/api/leaveRequest/create", authToken.verifyUserToken ,leaveRequestController.create);
+  router.put("/api/leaveRequest/edit", authToken.verifyUserToken, leaveRequestController.put);
+  router.delete("/api/leaveRequest/delete", authToken.verifyUserToken, leaveRequestController.deleteLeaveRequest);
+  router.get("/api/leaveRequest/getAll", authToken.verifyUserToken, leaveRequestController.getAll);
+  router.get("/api/leaveRequest/getLeaveRequest", authToken.verifyUserToken, leaveRequestController.getLeaveRequestByID);
 
-  // seminar
-  router.post("/api/seminar/create", authToken.verifyUserToken ,seminarController.create);
-  router.put("/api/seminar/edit", authToken.verifyUserToken, seminarController.put);
-  router.delete("/api/seminar/delete", authToken.verifyUserToken, seminarController.deleteSeminar);
-  router.get("/api/seminar/getAll", authToken.verifyUserToken, seminarController.getAll);
-  router.get("/api/seminar/getSeminar", authToken.verifyUserToken, seminarController.getSeminarByID);
+  // promotion
+  router.post("/api/promotion/create", authToken.verifyUserToken ,promotionController.create);
+  router.put("/api/promotion/edit", authToken.verifyUserToken, promotionController.put);
+  router.delete("/api/promotion/delete", authToken.verifyUserToken, promotionController.deletePromotion);
+  router.get("/api/promotion/getAll", authToken.verifyUserToken, promotionController.getAll);
+  router.get("/api/promotion/getPromotion", authToken.verifyUserToken, promotionController.getPromotionByID);
+
+  // teacher
+  router.post("/api/teacher/create", authToken.verifyUserToken ,teacherController.create);
+  router.put("/api/teacher/edit", authToken.verifyUserToken, teacherController.put);
+  router.delete("/api/teacher/delete", authToken.verifyUserToken, teacherController.deleteTeacher);
+  router.get("/api/teacher/getAll", authToken.verifyUserToken, teacherController.getAll);
+  router.get("/api/teacher/getTeacher", authToken.verifyUserToken, teacherController.getTeacherByID);
 
   
 

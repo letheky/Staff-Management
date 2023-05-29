@@ -10,63 +10,71 @@ export const USER_CHANGEPASSWORD = '/api/changepassword'
 export const USER_GET_ALL = '/api/getAllUser'
 export const USER_DELETE = '/api/user/delete'
 
-//student
-export const STUDENT_CREATE = '/api/student/create'
-export const STUDENT_EDIT = '/api/student/edit'
-export const STUDENT_DELETE = '/api/student/delete'
-export const STUDENT_GETALL = '/api/student/getAll'
-export const STUDENT_GET_BY_ID = '/api/student/getStudent'
-export const STUDENT_GET_BY_USERID = '/api/student/getStudentByUserID'
+//Department
+export const DEPARTMENT_CREATE = '/api/department/create'
+export const DEPARTMENT_EDIT = '/api/department/edit'
+export const DEPARTMENT_DELETE = '/api/department/delete'
+export const DEPARTMENT_GETALL = '/api/department/getAll'
+export const DEPARTMENT_GET_BY_ID = '/api/department/getDepartment'
 
-//admin
-export const ADMIN_CREATE = '/api/admin/create'
-export const ADMIN_EDIT = '/api/admin/edit'
-export const ADMIN_DELETE = '/api/admin/delete'
-export const ADMIN_GETALL = '/api/admin/getAll'
-export const ADMIN_GET_BY_ID = '/api/admin/getAdmin'
-export const ADMIN_GET_BY_USERID = '/api/admin/getAdminByUserID'
+//employee
+export const EMPLOYEE_CREATE = '/api/employee/create'
+export const EMPLOYEE_EDIT = '/api/employee/edit'
+export const EMPLOYEE_DELETE = '/api/employee/delete'
+export const EMPLOYEE_GETALL = '/api/employee/getAll'
+export const EMPLOYEE_GET_BY_ID = '/api/employee/getEmployee'
+export const EMPLOYEE_GET_ACTIVE = '/api/employee/getActiveEmployee'
+export const EMPLOYEE_DEACTIVE = '/api/employee/deActive'
+// export const employee_GET_BY_USERID = '/api/employee/getemployeeByUserID'
 
-//instructor
-export const INSTRUCTOR_CREATE = '/api/instructor/create'
-export const INSTRUCTOR_EDIT = '/api/instructor/edit'
-export const INSTRUCTOR_DELETE = '/api/instructor/delete'
-export const INSTRUCTOR_GETALL = '/api/instructor/getAll'
-export const INSTRUCTOR_GET_BY_ID = '/api/instructor/getInstructor'
-export const INSTRUCTOR_GET_BY_USERID = '/api/instructor/getInstructorByUserID'
+//contract
+export const CONTRACT_CREATE = '/api/contract/create'
+export const CONTRACT_EDIT = '/api/contract/edit'
+export const CONTRACT_DELETE = '/api/contract/delete'
+export const CONTRACT_GETALL = '/api/contract/getAll'
+export const CONTRACT_GET_BY_ID = '/api/contract/getContract'
+// export const contract_GET_BY_USERID = '/api/contract/getcontractByUserID'
 
-//circular
-export const CIRCULAR_CREATE = '/api/circular/create'
-export const CIRCULAR_EDIT = '/api/circular/edit'
-export const CIRCULAR_DELETE = '/api/circular/delete'
-export const CIRCULAR_GETALL = '/api/circular/getAll'
-export const CIRCULAR_GET_BY_ID = '/api/circular/getCircular'
+//staff
+export const STAFF_CREATE = '/api/staff/create'
+export const STAFF_EDIT = '/api/staff/edit'
+export const STAFF_DELETE = '/api/staff/delete'
+export const STAFF_GETALL = '/api/staff/getAll'
+export const STAFF_GET_BY_ID = '/api/staff/getStaff'
 
-//topic
-export const TOPIC_CREATE = '/api/topic/create'
-export const TOPIC_EDIT = '/api/topic/edit'
-export const TOPIC_DELETE = '/api/topic/delete'
-export const TOPIC_GETALL = '/api/topic/getAll'
-export const TOPIC_GET_BY_ID = '/api/topic/getTopic'
-export const GET_STUDENT_IN_TOPIC = '/api/topic/getStudentInResearch'
+//plan
+export const PLAN_CREATE = '/api/plan/create'
+export const PLAN_EDIT = '/api/plan/edit'
+export const PLAN_DELETE = '/api/plan/delete'
+export const PLAN_GETALL = '/api/plan/getAll'
+export const PLAN_GET_BY_ID = '/api/plan/getPlan'
+// export const GET_STUDENT_IN_TOPIC = '/api/topic/getStudentInleaveRequest'
 
-//paper
-export const PAPER_CREATE = '/api/paper/create'
-export const PAPER_EDIT = '/api/paper/edit'
-export const PAPER_DELETE = '/api/paper/delete'
-export const PAPER_GETALL = '/api/paper/getAll'
-export const PAPER_GET_BY_ID = '/api/paper/getPaper'
+//qualification
+export const QUALIFICAION_CREATE = '/api/qualification/create'
+export const QUALIFICAION_EDIT = '/api/qualification/edit'
+export const QUALIFICAION_DELETE = '/api/qualification/delete'
+export const QUALIFICAION_GETALL = '/api/qualification/getAll'
+export const QUALIFICAION_GET_BY_ID = '/api/qualification/getQualification'
 
-//research
-export const RESEARCH_CREATE = '/api/research/create'
-export const RESEARCH_EDIT = '/api/research/edit'
-export const RESEARCH_DELETE = '/api/research/delete'
-export const RESEARCH_GETALL = '/api/research/getAll'
-export const RESEARCH_GET_BY_ID = '/api/research/getResearch'
-export const GET_INSTRUCTOR_IN_RESEARCH = '/api/research/getInstructorInResearch'
+//leaveRequest
+export const LEAVE_REQUEST_CREATE = '/api/leaveRequest/create'
+export const LEAVE_REQUEST_EDIT = '/api/leaveRequest/edit'
+export const LEAVE_REQUEST_DELETE = '/api/leaveRequest/delete'
+export const LEAVE_REQUEST_GETALL = '/api/leaveRequest/getAll'
+export const LEAVE_REQUEST_GET_BY_ID = '/api/leaveRequest/getLeaveRequest'
+// export const GET_INSTRUCTOR_IN_leaveRequest = '/api/leaveRequest/getInstructorInleaveRequest'
 
-// seminar
-export const SEMINAR_CREATE = '/api/seminar/create'
-export const SEMINAR_EDIT = '/api/seminar/edit'
-export const SEMINAR_DELETE = '/api/seminar/delete'
-export const SEMINAR_GETALL = '/api/seminar/getAll'
-export const SEMINAR_GET_BY_ID = '/api/seminar/getSeminar'
+// promotion
+export const PROMOTION_CREATE = '/api/promotion/create'
+export const PROMOTION_EDIT = '/api/promotion/edit'
+export const PROMOTION_DELETE = '/api/promotion/delete'
+export const PROMOTION_GETALL = '/api/promotion/getAll'
+export const PROMOTION_GET_BY_ID = '/api/promotion/getPromotion'
+
+// teacher
+export const TEACHER_CREATE = '/api/teacher/create'
+export const TEACHER_EDIT = '/api/teacher/edit'
+export const TEACHER_DELETE = '/api/teacher/delete'
+export const TEACHER_GETALL = '/api/teacher/getAll'
+export const TEACHER_GET_BY_ID = '/api/teacher/getTeacher'

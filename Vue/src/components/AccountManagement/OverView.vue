@@ -345,7 +345,7 @@ export default {
         },
         {
           accountTypeID: 3,
-          accountTypeName: 'student',
+          accountTypeName: 'staff',
         },
       ]
       await account_managerment
